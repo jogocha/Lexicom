@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sistema de Asistencia RRHH</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a73e8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2838/2838912.png">
+  
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f1f5f9;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <iframe 
+    id="appFrame"
+    src="https://script.google.com/macros/s/AKfycbznyYRoE6A9dH6dGPlNYhN9QunCgc9coY7e578WspkOQl_ULHSdUaF4HPoiJ1naUW0I/exec" 
+    allow="geolocation; camera; microphone; clipboard-read; clipboard-write;"
+  ></iframe>
+
+  <script>
+    // Registrar el Service Worker para habilitar la instalación como App
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(console.error);
+    }
+
+    // Si abren con ?portal=honorarios, transferirlo automáticamente al iframe
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("portal") === "honorarios") {
+      document.getElementById("appFrame").src = 
+        "https://script.google.com/macros/s/AKfycbznyYRoE6A9dH6dGPlNYhN9QunCgc9coY7e578WspkOQl_ULHSdUaF4HPoiJ1naUW0I/exec?portal=honorarios";
+    }
+  </script>
+</body>
+</html>
