@@ -3,5 +3,5 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  // Permite la carga directa de la aplicación
+  // Manejo de peticiones web
 });
